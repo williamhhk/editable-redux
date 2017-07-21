@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { ADD_TODO, DELETE_TODO, UPDATE_TODO, UPDATE_EXT_TODO, TOGGLE_DONE, SELECTED }  from './todo/actions/todo';
 import {AppStore} from './app.stores'
 import { Actions } from './todo/actions/todo'
-
+import { User, Computer } from './todo/actions/todo'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   editing = false;
   indexToEdit: number | null;
   // TODO 
-  selected : any;
+  selected : User | Computer;
   selectedTodo$: Observable<any>;
 
   constructor(private store: Store<any>) {}
@@ -65,15 +65,15 @@ export class AppComponent implements OnInit {
   }
 
   updateTodo(updatedTodo) {
-    console.log(this.selected);
+    console.log(this.selected.category);
     if (this.selected.category === "USER")
     {
-      this.selected.value = updatedTodo;
-      this.store.dispatch({ type: UPDATE_TODO, payload: { index: this.indexToEdit, newValue: this.selected.value } });
+
+      this.store.dispatch({ type: UPDATE_TODO, payload: { index: this.indexToEdit, newValue: updatedTodo } });
     }
     else if (this.selected.category === "COMPUTER") {
-      this.selected.valueExt = updatedTodo;
-      this.store.dispatch({ type: UPDATE_EXT_TODO, payload: { index: this.indexToEdit, newValue: this.selected.valueExt } });
+
+      this.store.dispatch({ type: UPDATE_EXT_TODO, payload: { index: this.indexToEdit, newValue: updatedTodo } });
       
     }
     this.todo = '';

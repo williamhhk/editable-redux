@@ -48,3 +48,14 @@ export type Actions =
   | ToggleDoneAction
   | SelectedTodoAction
   | UpdateExtTodoAction;
+
+
+  export interface User {
+    category : string;
+    others : string;
+  }
+
+  export interface Computer {
+    category : string;
+    machineName : string;
+  }
